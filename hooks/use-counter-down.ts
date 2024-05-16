@@ -6,7 +6,7 @@ const useCounterDown = (initialTime: number) => {
     const [isActive, setIsActive] = useState<boolean>(true);
 
     useEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
+    let timer = null;
 
     if (isActive && time > 0) {
       timer = setTimeout(() => {

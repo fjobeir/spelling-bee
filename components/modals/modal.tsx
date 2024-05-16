@@ -1,11 +1,11 @@
 'use client';
-import { FC, MouseEvent } from "react";
+import { FC } from "react";
 import { ModalProps } from "@/types/modal";
 import CloseIcon from "../icons/close";
 
 
 const Modal: FC<ModalProps> = ({ title, children, actions, onClose }) => {
-    const closeModal = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+    const closeModal = () => {
         if (onClose) {
             onClose();
         }

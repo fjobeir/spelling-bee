@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Home({ params: { locale } }: Props): Promise<JSX.Element> {
+export default async function Home({ params: { locale } }: Props) {
   // load the dictionary on the server not to expose its content easily in the network tab.
   const dictionaries = await import(`@/dictionaries/${locale}`);
   const randomIndex: number = Math.floor(Math.random() * dictionaries.default.length);
