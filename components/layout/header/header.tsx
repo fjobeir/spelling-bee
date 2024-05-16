@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import { FC } from "react";
 import LanguagePicker from "./language-picker";
-import InformationIcon from "../../icons/information";
 import InfoButton from "./info-button";
 
 const Header: FC = () => {

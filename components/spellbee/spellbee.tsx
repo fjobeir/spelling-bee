@@ -19,6 +19,7 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
     const [correctGuesses, setCorrectGuesses] = useState<Array<string>>([]);
     const [currentGuess, setCurrentGuess] = useState<string>('');
     const [impression, setImpression] = useState<string>('');
+    const [isShaking, setIsShaking] = useState<boolean>(false);
     
     useEffect(() => {
         const percentage = (correctGuesses.length / words.length) * 100;
@@ -38,12 +39,14 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
             alert(t('game.errors.timeUp'));
             return;
         }
-        if ([mustUsed, ...restOfLetters].includes(guess) || guess === 'Backspace' || guess === 'Enter' || guess === 'capslock') {
+        if (['Meta', 'Control', 'Alt', 'Shift'].includes(guess)) {
+            return;
+        }
+        if ([mustUsed, ...restOfLetters, 'Backspace', 'Enter'].includes(guess)) {
             if (guess === 'Enter') {
                 submitGuess();
             } else if (guess === 'Backspace') {
                 setCurrentGuess(currentGuess.slice(0, -1));
-
             } else {
                 setCurrentGuess(currentGuess + guess);
             }
@@ -63,9 +66,18 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
             addTime(15);
             setCurrentGuess('')
         } else {
-            alert(t('game.errors.wrongGuess'));
+            shakeInput();
+            // alert(t('game.errors.wrongGuess'));
         }
     }
+
+    const shakeInput = () => {
+        setIsShaking(true);
+        setTimeout(() => {
+            setIsShaking(false);
+        }, 500);
+    };
+
     return (
         <div className="container mx-auto px-3">
             <div className="relative max-w-xl mx-auto mb-20 flex flex-col gap-5">
@@ -75,7 +87,7 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
                         <span className="text-sm">{correctGuesses.length} / {words.length}</span>
                         <span>{impression}</span>
                     </p>
-                    <span>{formattedTime}</span>
+                    <span className={`${time === 0 && 'text-red-300'}`}>{formattedTime}</span>
                 </div>
                 <div className="w-full h-4 border border-solid border-gray-200 rounded-full bg-gray-100 mb-">
                     <div className="h-full bg-primary rounded-full" style={{ width: `${(correctGuesses.length / words.length) * 100}%` }} />
@@ -85,7 +97,7 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
                 {/* Input */}
                 <input 
                     disabled={time === 0} 
-                    className="bg-white text-center text-5xl uppercase py-2"
+                    className={`bg-white text-center text-5xl uppercase py-2 border border-solid border-gray-200 rounded-md ${time === 0 ? 'bg-gray-100' : ''} ${isShaking ? 'animate-shake' : ''}`}
                     value={currentGuess} 
                     onKeyDown={(e) => {
                         updateGuess(e.key);

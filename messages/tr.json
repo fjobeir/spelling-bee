@@ -8,5 +8,13 @@
       "title": "Nasıl oynanır",
       "description": "Kovandan gelen harfleri kullanarak kelimeler oluşturun ve maksimum puanı almaya çalışın."
     }
+  },
+  "game": {
+    "errors": {
+      "wrongGuess": "Oops! Yanlış tahmin, lütfen tekrar deneyin",
+      "alreadyGuessed": "Bu kelimeyi zaten tahmin ettiniz",
+      "invalidCharacter": "Geçersiz karakter",
+      "timeUp": "Süre doldu :/ tekrar oyunu başlatın"
+    }
   }
 }
