@@ -1,0 +1,20 @@
+{
+  "app": {
+    "name": "SpellBee Game",
+    "allrights": "All rights reserved"
+  },
+  "modals": {
+    "info": {
+      "title": "How to play",
+      "description": "Create words using letters from the hive and try to get the maximum score."
+    }
+  },
+  "game": {
+    "errors": {
+      "wrongGuess": "Oops! wrong guess",
+      "alreadyGuessed": "You have already selected this, please try another one",
+      "invalidCharacter": "Please type a valid character",
+      "timeUp": "Time is up, but you can still play again :)"
+    }
+  }
+}

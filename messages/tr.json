@@ -1,0 +1,12 @@
+{
+  "app": {
+    "name": "SpellBee Uyunu",
+    "allrights": "Bütün Hakklarıı Saklıdır"
+  },
+  "modals": {
+    "info": {
+      "title": "Nasıl oynanır",
+      "description": "Kovandan gelen harfleri kullanarak kelimeler oluşturun ve maksimum puanı almaya çalışın."
+    }
+  }
+}

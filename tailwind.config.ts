@@ -13,8 +13,19 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        primary: '#ffd124'
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }: { addUtilities: any }) {
+      addUtilities({
+        '.filter-goo': {
+          filter: "url('#goo')",
+        },
+      }, ['before']);
+    },
+  ],
 };
 export default config;
