@@ -2,11 +2,12 @@
 import useCounterDown from "@/hooks/use-counter-down";
 import { DictionaryItem } from "@/types/dictionary";
 import { useTranslations } from "next-intl";
-import { FC, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import GuessedWords from "./guessed-words";
 import Hex from "./hex";
 import UndoIcon from "../icons/undo";
 import SendIcon from "../icons/send";
+import Modal from "../modals/modal";
 
 type Props = {
     dictionary: DictionaryItem;
@@ -20,7 +21,8 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
     const [currentGuess, setCurrentGuess] = useState<string>('');
     const [impression, setImpression] = useState<string>('');
     const [isShaking, setIsShaking] = useState<boolean>(false);
-    
+    const [feedback, setFeedback] = useState<{title: string; message: ReactNode|string}>({title: '', message: ''});
+
     useEffect(() => {
         const percentage = (correctGuesses.length / words.length) * 100;
         if (percentage === 0) {
@@ -36,7 +38,10 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
 
     const updateGuess = (guess: string) => {
         if (time === 0) {
-            alert(t('game.errors.timeUp'));
+            setFeedback({title: t('game.error'), message: <>
+                <p>{t('game.errors.timeUp')}</p>
+                <button onClick={() => window.location.reload()} className="underline">{t('game.actions.newGame')}</button>
+            </>});
             return;
         }
         if (['Meta', 'Control', 'Alt', 'Shift'].includes(guess)) {
@@ -51,14 +56,14 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
                 setCurrentGuess(currentGuess + guess);
             }
         } else {
-            alert(t('game.errors.invalidCharacter'));
+            setFeedback({title: t('game.error'), message: t('game.errors.invalidCharacter')});
         }
     }
 
     const submitGuess = () => {
         if (correctGuesses.includes(currentGuess)){
             // already guessed
-            alert(t('game.errors.alreadyGuessed'));
+            setFeedback({title: t('game.error'), message: t('game.errors.alreadyGuessed')});
             return;
         }
         if (words.includes(currentGuess)){
@@ -67,7 +72,6 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
             setCurrentGuess('')
         } else {
             shakeInput();
-            // alert(t('game.errors.wrongGuess'));
         }
     }
 
@@ -79,8 +83,9 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
     };
 
     return (
+        <>
         <div className="container mx-auto px-3">
-            <div className="relative max-w-xl mx-auto mb-20 flex flex-col gap-5">
+            <div className="relative max-w-xl mx-auto flex flex-col gap-5">
                 {/* Progress */}
                 <div className="flex items-center justify-between">
                     <p className="flex items-center gap-2">
@@ -112,15 +117,21 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
                 <div className="flex justify-center gap-3">
                     <button className="rounded-full py-2 px-4 inline-flex items-center gap-2 bg-red-100" onClick={() => updateGuess('Backspace')}>
                         <UndoIcon />
-                        <span>Undo</span>
+                        <span>{t('game.actions.undo')}</span>
                     </button>
                     <button className="rounded-full py-2 px-4 inline-flex items-center gap-2 bg-green-100" onClick={() => updateGuess('Enter')}>
-                        <span>Send</span>
+                        <span>{t('game.actions.send')}</span>
                         <SendIcon />
                     </button>
                 </div>
             </div>
         </div>
+        {
+            feedback.title && <Modal title={feedback.title} onClose={() => {
+                setFeedback({title: '', message: ''});
+            }}>{feedback.message}</Modal>
+        }
+        </>
     );
 };
 

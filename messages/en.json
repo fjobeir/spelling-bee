@@ -15,6 +15,12 @@
       "alreadyGuessed": "You have already selected this, please try another one",
       "invalidCharacter": "Please type a valid character",
       "timeUp": "Time is up, but you can still play again :)"
-    }
+    },
+    "actions": {
+      "send": "Send",
+      "undo": "Undo",
+      "newGame": "New Game"
+    },
+    "error": "Error"
   }
 }

@@ -15,6 +15,12 @@
       "alreadyGuessed": "Bu kelimeyi zaten tahmin ettiniz",
       "invalidCharacter": "Geçersiz karakter",
       "timeUp": "Süre doldu :/ tekrar oyunu başlatın"
-    }
+    },
+    "actions": {
+      "send": "Gönder",
+      "undo": "Geri al",
+      "newGame": "Yeni Oyun"
+    },
+    "error": "Hata"
   }
 }
