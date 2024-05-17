@@ -2,7 +2,7 @@
 import useCounterDown from "@/hooks/use-counter-down";
 import { DictionaryItem } from "@/types/dictionary";
 import { useTranslations } from "next-intl";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import GuessedWords from "./guessed-words";
 import Hex from "./hex";
 import UndoIcon from "../icons/undo";
@@ -36,6 +36,15 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
         }
     }, [correctGuesses, words.length]);
 
+    const score = useMemo(() => {
+        return correctGuesses.reduce((acc, guess) => {
+            // 10 points for each correct guess
+            // 3 is the minimum length of a word
+            // 1 point for each additional letter
+            return 10 + acc + (guess.length - 3);
+        }, 0);
+    }, [correctGuesses]);
+
     const updateGuess = (guess: string) => {
         if (time === 0) {
             setFeedback({title: t('game.error'), message: <>
@@ -62,7 +71,6 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
 
     const submitGuess = () => {
         if (correctGuesses.includes(currentGuess)){
-            // already guessed
             setFeedback({title: t('game.error'), message: t('game.errors.alreadyGuessed')});
             return;
         }
@@ -92,6 +100,7 @@ const SpellBee: FC<Props> = ({ dictionary }) => {
                         <span className="text-sm">{correctGuesses.length} / {words.length}</span>
                         <span>{impression}</span>
                     </p>
+                    <span className="font-bold">{time === 0 && `${t('game.score')}: ${score}`}</span>
                     <span className={`${time === 0 && 'text-red-300'}`}>{formattedTime}</span>
                 </div>
                 <div className="w-full h-4 border border-solid border-gray-200 rounded-full bg-gray-100 mb-">

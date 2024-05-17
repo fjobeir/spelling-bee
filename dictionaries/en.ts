@@ -276,6 +276,43 @@ const dictionary: Array<DictionaryItem> = [
             'taffy',
             'tiff',
         ]
+    },
+    {
+        mustUsed: 'b',
+        restOfLetters: ['a', 'e', 'k', 'm', 'n', 't'],
+        words: [
+            'embankment',
+            'abate',
+            'abatement',
+            'abbe',
+            'abeam',
+            'abet',
+            'babe',
+            'bake',
+            'banana',
+            'bane',
+            'bank',
+            'bantam',
+            'bate',
+            'batman',
+            'batmen',
+            'batten',
+            'beak',
+            'beam',
+            'bean',
+            'beat',
+            'beaten',
+            'been',
+            'beet',
+            'bennet',
+            'bent',
+            'beta',
+            'betake',
+            'betaken',
+            'embank',
+            'kebab',
+            'mamba',
+        ]
     }
 ];
 
