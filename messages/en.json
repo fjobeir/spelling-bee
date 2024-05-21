@@ -6,7 +6,7 @@
   "modals": {
     "info": {
       "title": "How to play",
-      "description": "Create words using letters from the hive and try to get the maximum score. You get 10 points for every correct guess and additional 1 point for every letter above 3 in the quessed word."
+      "description": "Create words using letters from the hive and try to get the maximum score. You get 10 points for each correct guess and an additional 1 point for each letter above 3 in the guessed word."
     }
   },
   "game": {

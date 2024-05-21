@@ -6,7 +6,7 @@
   "modals": {
     "info": {
       "title": "Nasıl oynanır",
-      "description": "Kovandan gelen harfleri kullanarak kelimeler oluşturun ve maksimum puanı almaya çalışın. Her kelime için 10 saniyeniz var"
+      "description": "Kovandan gelen harfleri kullanarak kelimeler oluşturun ve maksimum puanı almaya çalışın. Her doğru tahmin için 10 puan, tahmin edilen kelimede 3'ün üzerindeki her harf için ilave 1 puan alabilirsiniz. 'ı,ğ,ü,ö,ç' harfleri için sırasıyla 'i,g,u,o,c' kullanabilirsiniz."
     }
   },
   "game": {
